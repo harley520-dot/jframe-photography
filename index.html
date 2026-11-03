@@ -1,0 +1,762 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>J/FRAME by Dr. Jerry | Photography</title>
+  <meta name="description" content="J/FRAME by Dr. Jerry — 用雙輪探索世界，以鏡頭記錄人生。">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+
+  <style>
+    :root {
+      --red: #d72e23;
+      --black: #0b0c0e;
+      --white: #f5f2ed;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--black);
+      color: var(--white);
+      font-family: Arial, "Noto Sans TC", sans-serif;
+    }
+
+    a { text-decoration: none; }
+
+    /* 導覽列 */
+    nav.container-fluid {
+      padding: 18px 6%;
+      background: #111214;
+      border-bottom: 1px solid #333;
+      align-items: center;
+    }
+
+    nav ul { align-items: center; }
+
+    nav a {
+      color: white;
+      font-size: 14px;
+    }
+
+    nav a:hover { color: var(--red); }
+
+    nav a[role="button"] {
+      background: transparent;
+      border: 1px solid white;
+      color: white;
+      padding: 10px 16px;
+    }
+
+    .logo {
+      color: white;
+      font: italic 38px Georgia, serif;
+      letter-spacing: 2px;
+      line-height: 1;
+    }
+
+    .logo .slash { color: var(--red); }
+
+    .logo small {
+      display: block;
+      text-align: right;
+      font-size: 15px;
+      letter-spacing: 2px;
+      margin-top: 8px;
+    }
+
+    /* 首頁 */
+    main.container {
+      max-width: 1300px;
+      padding-top: 60px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 60px;
+      align-items: center;
+      min-height: 650px;
+    }
+
+    .eyebrow {
+      color: #e35b4f;
+      letter-spacing: 4px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .hero h2 {
+      color: white;
+      font-family: Georgia, "Noto Serif TC", serif;
+      font-size: clamp(36px, 4.3vw, 66px);
+      line-height: 1.45;
+      margin-top: 25px;
+    }
+
+    .hero h3 {
+      color: #d4d0cd;
+      font: italic 21px Georgia, serif;
+      line-height: 1.5;
+    }
+
+    .red-line {
+      background: var(--red);
+      width: 60px;
+      height: 4px;
+      margin: 28px 0;
+    }
+
+    .hero p {
+      color: #c9c9c9;
+      font-size: 16px;
+      line-height: 2;
+    }
+
+    .cta {
+      display: inline-block;
+      background: var(--red);
+      color: white;
+      padding: 16px 28px;
+      margin-top: 25px;
+      font-weight: bold;
+      transition: background .2s;
+    }
+
+    .cta:hover {
+      background: #f04435;
+      color: white;
+    }
+
+    /* 雜誌封面：完整顯示，不裁切 */
+    .cover {
+      margin: 0;
+      padding: 12px;
+      background: #18191b;
+      border: 1px solid #303033;
+      box-shadow: 0 25px 65px rgba(0,0,0,.5);
+    }
+
+    .cover img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 680px;
+      object-fit: contain;
+    }
+
+    .cover figcaption {
+      margin-top: 12px;
+      color: #aaa;
+      font-size: 12px;
+      text-align: center;
+      letter-spacing: 2px;
+    }
+
+    /* 品牌故事 */
+    .story {
+      margin-top: 90px;
+      padding: 55px;
+      background: #ebe7e1;
+      color: #222;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 45px;
+      align-items: center;
+    }
+
+    .story h3 {
+      color: #171717;
+      font-size: 28px;
+      letter-spacing: 3px;
+    }
+
+    .story p {
+      color: #444;
+      font-size: 15px;
+      line-height: 2.2;
+    }
+
+    /* 攝影作品集 */
+    .works {
+      padding: 90px 0;
+    }
+
+    .works h3 {
+      color: white;
+      font-size: 28px;
+      letter-spacing: 4px;
+    }
+
+    .works > p {
+      color: #aaa;
+      font-size: 14px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .photo-card {
+      padding: 0;
+      border: 1px solid #292929;
+      background: #17181a;
+      cursor: pointer;
+      text-align: left;
+      overflow: hidden;
+    }
+
+    .photo-card img {
+      width: 100%;
+      height: 350px;
+      object-fit: contain;
+      background: #101113;
+      display: block;
+      transition: transform .35s;
+    }
+
+    .photo-card:hover img {
+      transform: scale(1.035);
+    }
+
+    .photo-card span {
+      display: block;
+      padding: 18px;
+      color: white;
+      font-size: 17px;
+    }
+
+    .photo-card em {
+      color: #e34b3e;
+      font-style: normal;
+      font-size: 13px;
+      letter-spacing: 2px;
+    }
+
+    /* 關於我 */
+    .about {
+      padding: 50px 0 90px;
+      border-top: 1px solid #333;
+    }
+
+    .about h3 {
+      color: white;
+      font: italic 36px Georgia, serif;
+    }
+
+    .about p {
+      color: #bbb;
+      max-width: 850px;
+      line-height: 2.2;
+    }
+
+    /* 全螢幕賞圖 */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0,0,0,.97);
+      align-items: center;
+      justify-content: center;
+      padding: 60px;
+    }
+
+    .lightbox.open { display: flex; }
+
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 82vh;
+      object-fit: contain;
+    }
+
+    .lightbox button {
+      position: absolute;
+      width: 48px;
+      height: 54px;
+      padding: 0;
+      border: 0;
+      background: rgba(40,40,40,.8);
+      color: white;
+      font-size: 30px;
+      cursor: pointer;
+    }
+
+    .lightbox button:hover {
+      background: var(--red);
+    }
+
+    .close-btn { top: 15px; right: 15px; }
+    .prev-btn { top: 50%; left: 10px; }
+    .next-btn { top: 50%; right: 10px; }
+
+    .counter {
+      position: absolute;
+      bottom: 20px;
+      color: #aaa;
+      font-size: 14px;
+    }
+
+    /* 訂閱展示區 */
+    section[aria-label="Subscribe example"] {
+      padding: 45px 20px;
+      background: #1b1c1e;
+    }
+
+    section[aria-label="Subscribe example"] article {
+      background: transparent;
+      box-shadow: none;
+      padding: 0;
+    }
+
+    section[aria-label="Subscribe example"] h2 {
+      color: white;
+    }
+
+    section[aria-label="Subscribe example"] h3 {
+      color: #aaa;
+      font-size: 15px;
+    }
+
+    section[aria-label="Subscribe example"] input {
+      background: white;
+      color: #222;
+    }
+
+    footer.container {
+      padding: 35px 15px;
+      color: #999;
+    }
+
+    footer a { color: #bbb; }
+
+    /* 手機版 */
+    @media (max-width: 768px) {
+      nav.container-fluid {
+        padding: 15px;
+        flex-wrap: wrap;
+      }
+
+      nav ul { gap: 10px; }
+
+      nav a { font-size: 12px; }
+
+      .logo { font-size: 26px; }
+      .logo small { font-size: 11px; }
+
+      main.container { padding-top: 35px; }
+
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 35px;
+        min-height: 0;
+      }
+
+      .hero h2 { font-size: 36px; }
+
+      .story {
+        grid-template-columns: 1fr;
+        padding: 30px;
+        gap: 10px;
+        margin-top: 60px;
+      }
+
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .photo-card img { height: 380px; }
+
+      .works { padding: 60px 0; }
+
+      .lightbox { padding: 45px; }
+
+      .lightbox button {
+        width: 38px;
+        height: 46px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 導覽列 -->
+  <nav class="container-fluid">
+    <ul>
+      <li>
+        <strong class="logo">
+          J<span class="slash">/</span>FRAME
+          <small>by Dr. Jerry</small>
+        </strong>
+      </li>
+    </ul>
+
+    <ul>
+      <li><a href="#home">首頁</a></li>
+      <li><a href="#works">作品集</a></li>
+      <li><a href="#story">品牌故事</a></li>
+      <li><a href="#about">關於我</a></li>
+      <li><a href="#contact" role="button">聯絡</a></li>
+    </ul>
+  </nav>
+
+  <main class="container">
+    <div class="grid">
+      <section>
+
+        <!-- 首頁主視覺 -->
+        <div class="hero" id="home">
+
+          <div>
+            <div class="eyebrow">
+              PHOTOGRAPHY / RIDING / LIFE
+            </div>
+
+            <hgroup>
+              <h2>
+                人生，是一場<br>
+                爽度與痛感極高的旅程。
+              </h2>
+              <h3>
+                Frame the Journey. Feel Everything.
+              </h3>
+            </hgroup>
+
+            <div class="red-line"></div>
+
+            <p>
+              騎過的路，吹過的風，經歷過的痛，
+              都是生命留下的痕跡。<br>
+              用雙輪探索世界，以鏡頭留下故事。
+            </p>
+
+            <a href="#works" class="cta">
+              瀏覽我的作品 →
+            </a>
+          </div>
+
+          <figure class="cover">
+            <img
+              src="IMG_2961.png"
+              alt="Dr. Jerry 日系紅色 Honda 重機雜誌封面"
+            >
+            <figcaption>
+              J/FRAME — RIDING / LIFE
+            </figcaption>
+          </figure>
+
+        </div>
+
+        <!-- 品牌故事 -->
+        <div class="story" id="story">
+
+          <div>
+            <h3>J/FRAME</h3>
+            <p>by Dr. Jerry</p>
+          </div>
+
+          <div>
+            <h3>品牌故事</h3>
+            <p>
+              J/FRAME，是我用攝影框住人生片段的方式。
+              J 代表 Jerry，也代表 Journey——旅程。
+              FRAME 代表視角、構圖，以及那些值得被留下的瞬間。
+              <br><br>
+              我用雙輪探索世界，用鏡頭記錄故事。
+              不只拍下眼前的風景，更想留下當下的情緒、
+              自由與生命的重量。
+            </p>
+          </div>
+
+        </div>
+
+        <!-- 攝影作品集 -->
+        <div class="works" id="works">
+
+          <h3>SELECTED WORKS</h3>
+
+          <p>
+            攝影作品集｜點擊照片可全螢幕放大，
+            使用左右箭頭切換。
+          </p>
+
+          <div class="gallery">
+
+            <button class="photo-card" type="button">
+              <img
+                src="IMG_2961.png"
+                alt="紅色 Honda 重機雜誌封面"
+              >
+              <span>
+                自由的代價 <em>/ RIDE</em>
+              </span>
+            </button>
+
+            <button class="photo-card" type="button">
+              <img
+                src="IMG_2961.png"
+                alt="騎行與人生故事"
+              >
+              <span>
+                路上的故事 <em>/ STORIES</em>
+              </span>
+            </button>
+
+            <button class="photo-card" type="button">
+              <img
+                src="IMG_2961.png"
+                alt="重機旅行攝影"
+              >
+              <span>
+                旅程未完 <em>/ EXPLORE</em>
+              </span>
+            </button>
+
+          </div>
+
+          <p style="margin-top:25px">
+            <small>
+              目前先以已上傳的封面測試網站功能。
+              之後可以替換成不同攝影作品。
+            </small>
+          </p>
+
+        </div>
+
+        <!-- 關於 Dr. Jerry -->
+        <div class="about" id="about">
+
+          <h3>Behind the Frame.</h3>
+
+          <p>
+            我是 Dr. Jerry。
+          </p>
+
+          <p>
+            人生從來不是一條筆直的道路。
+            有時迎著風，享受速度與自由；
+            有時面對未知的彎道，承受疲憊、
+            風險與痛楚。
+          </p>
+
+          <p>
+            但正是這些真實的感受，
+            讓每段旅程變得值得記憶。
+          </p>
+
+          <p>
+            <strong>
+              J/FRAME — Frame the Journey.
+              Feel Everything.
+            </strong>
+          </p>
+
+        </div>
+
+      </section>
+    </div>
+  </main>
+
+  <!-- 訂閱展示區 -->
+  <section id="contact" aria-label="Subscribe example">
+    <div class="container">
+      <article>
+        <hgroup>
+          <h2>Stay in the Frame.</h2>
+          <h3>
+            攝影、騎行、生活。
+            此表單目前僅供展示，尚未啟用訂閱功能。
+          </h3>
+        </hgroup>
+
+        <form class="grid"
+          onsubmit="event.preventDefault(); alert('訂閱功能尚未啟用');">
+
+          <input
+            type="text"
+            id="firstname"
+            name="firstname"
+            placeholder="你的稱呼"
+            aria-label="你的稱呼"
+            required
+          >
+
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="電子郵件"
+            aria-label="電子郵件"
+            required
+          >
+
+          <button type="submit">
+            追蹤動態
+          </button>
+
+        </form>
+      </article>
+    </div>
+  </section>
+
+  <!-- 頁尾 -->
+  <footer class="container">
+    <small>
+      © 2026 J/FRAME by Dr. Jerry
+      • <a href="#works">Photography</a>
+      • <a href="#story">Brand Story</a>
+    </small>
+  </footer>
+
+  <!-- 全螢幕照片瀏覽 -->
+  <div
+    class="lightbox"
+    id="lightbox"
+    role="dialog"
+    aria-modal="true"
+    aria-label="全螢幕攝影作品"
+    aria-hidden="true"
+  >
+
+    <button
+      type="button"
+      class="close-btn"
+      aria-label="關閉照片"
+    >×</button>
+
+    <button
+      type="button"
+      class="prev-btn"
+      aria-label="上一張照片"
+    >‹</button>
+
+    <img id="lightbox-image" alt="放大攝影作品">
+
+    <button
+      type="button"
+      class="next-btn"
+      aria-label="下一張照片"
+    >›</button>
+
+    <div class="counter" id="counter"></div>
+
+  </div>
+
+  <script>
+    (() => {
+      const cards = [
+        ...document.querySelectorAll(".photo-card")
+      ];
+
+      const lightbox = document.getElementById("lightbox");
+      const image = document.getElementById("lightbox-image");
+      const counter = document.getElementById("counter");
+
+      let current = 0;
+      let previousFocus = null;
+      let touchStartX = 0;
+
+      function showPhoto(number) {
+        current = (number + cards.length) % cards.length;
+
+        const source = cards[current].querySelector("img");
+
+        image.src = source.src;
+        image.alt = source.alt;
+
+        counter.textContent =
+          (current + 1) + " / " + cards.length;
+      }
+
+      function openLightbox(number) {
+        previousFocus = document.activeElement;
+
+        showPhoto(number);
+
+        lightbox.classList.add("open");
+        lightbox.setAttribute("aria-hidden", "false");
+
+        document.body.style.overflow = "hidden";
+
+        lightbox.querySelector(".close-btn").focus();
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove("open");
+        lightbox.setAttribute("aria-hidden", "true");
+
+        document.body.style.overflow = "";
+
+        image.removeAttribute("src");
+
+        if (previousFocus) previousFocus.focus();
+      }
+
+      cards.forEach((card, index) => {
+        card.addEventListener("click", () => {
+          openLightbox(index);
+        });
+      });
+
+      lightbox.querySelector(".close-btn")
+        .addEventListener("click", closeLightbox);
+
+      lightbox.querySelector(".prev-btn")
+        .addEventListener("click", () => {
+          showPhoto(current - 1);
+        });
+
+      lightbox.querySelector(".next-btn")
+        .addEventListener("click", () => {
+          showPhoto(current + 1);
+        });
+
+      lightbox.addEventListener("click", (event) => {
+        if (event.target === lightbox) {
+          closeLightbox();
+        }
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (!lightbox.classList.contains("open")) return;
+
+        if (event.key === "Escape") {
+          closeLightbox();
+        }
+
+        if (event.key === "ArrowLeft") {
+          showPhoto(current - 1);
+        }
+
+        if (event.key === "ArrowRight") {
+          showPhoto(current + 1);
+        }
+      });
+
+      lightbox.addEventListener("touchstart", (event) => {
+        touchStartX = event.changedTouches[0].screenX;
+      }, { passive: true });
+
+      lightbox.addEventListener("touchend", (event) => {
+        const delta =
+          event.changedTouches[0].screenX - touchStartX;
+
+        if (Math.abs(delta) > 45) {
+          showPhoto(current + (delta < 0 ? 1 : -1));
+        }
+      }, { passive: true });
+    })();
+  </script>
+
+</body>
+</html>
